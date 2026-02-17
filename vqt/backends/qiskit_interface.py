@@ -35,15 +35,23 @@ class QiskitInterface:
             gate_name = instr.gate.name.lower()
             
             # Map qubits to Qiskit objects
-            qk_qubits = [qreg_map[q.register.name][q.index] for q in instr.qubits]
-            qk_clbits = [creg_map[c.register.name][c.index] for c in instr.clbits]
+            qk_qubits = [qreg_map[q.register_name][q.index] for q in instr.qubits]
+            qk_clbits = [creg_map[c.register_name][c.index] for c in instr.clbits]
 
             if gate_name == 'h':
                 qk_circuit.h(qk_qubits[0])
             elif gate_name == 'x':
                 qk_circuit.x(qk_qubits[0])
+            elif gate_name == 'y':
+                qk_circuit.y(qk_qubits[0])
             elif gate_name == 'z':
                 qk_circuit.z(qk_qubits[0])
+            elif gate_name == 's':
+                qk_circuit.s(qk_qubits[0])
+            elif gate_name == 't':
+                qk_circuit.t(qk_qubits[0])
+            elif gate_name == 'rz':
+                qk_circuit.rz(instr.gate.params[0], qk_qubits[0])
             elif gate_name == 'cx':
                 qk_circuit.cx(qk_qubits[0], qk_qubits[1])
             elif gate_name == 'swap':

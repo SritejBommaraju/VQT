@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VQT Certificate Dashboard - certified_bell</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e0e0e0; padding: 20px; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { color: #58a6ff; margin-bottom: 8px; }
+  h2 { color: #79c0ff; margin: 24px 0 12px 0; border-bottom: 1px solid #21262d; padding-bottom: 6px; }
+  .header { text-align: center; padding: 20px 0; }
+  .header .subtitle { color: #8b949e; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 16px; }
+  .card h3 { color: #58a6ff; margin-bottom: 8px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+  pre { background: #0d1117; border: 1px solid #21262d; border-radius: 6px; padding: 12px; overflow-x: auto; font-size: 12px; line-height: 1.5; color: #c9d1d9; }
+  .fidelity-badge { display: inline-block; padding: 6px 20px; border-radius: 20px; font-weight: bold; font-size: 18px; }
+  .fidelity-badge.pass { background: #238636; color: #fff; }
+  .fidelity-badge.fail { background: #da3633; color: #fff; }
+  .certified-stamp { text-align: center; margin: 20px 0; padding: 20px; border: 3px solid #238636; border-radius: 12px; background: rgba(35, 134, 54, 0.1); }
+  .certified-stamp .label { font-size: 28px; font-weight: bold; color: #3fb950; letter-spacing: 4px; }
+  .sig-valid { color: #3fb950; font-weight: bold; }
+  .sig-invalid { color: #f85149; font-weight: bold; }
+  .metric { display: inline-block; margin: 4px 8px; padding: 4px 12px; background: #21262d; border-radius: 12px; font-size: 13px; }
+  .metric .val { color: #58a6ff; font-weight: bold; }
+  .chart-container { text-align: center; margin: 12px 0; }
+  ul { margin-left: 20px; }
+  li { margin: 4px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>VQT Certificate Dashboard</h1>
+    <p class="subtitle">Circuit: certified_bell</p>
+  </div>
+
+  <h2>Circuit Diagrams</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Original Circuit</h3>
+      <pre>q[0] : -H--*--X--X----
+q[1] : ----X----------</pre>
+      <div>
+        <span class="metric">Gates: <span class="val">4</span></span>
+        <span class="metric">Depth: <span class="val">4</span></span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Optimized Circuit</h3>
+      <pre>q[0] : -H--*----
+q[1] : ----X----</pre>
+      <div>
+        <span class="metric">Gates: <span class="val">2</span></span>
+        <span class="metric">Depth: <span class="val">2</span></span>
+      </div>
+    </div>
+  </div>
+
+  <h2>Optimization Summary</h2>
+  <div class="card">
+    <ul>
+      <li><strong>GateCancellation</strong>: 1 transformation(s)</li>
+
+    </ul>
+  </div>
+
+  <h2>Gate Count Comparison</h2>
+  <div class="card chart-container">
+    <svg width="330" height="240" xmlns="http://www.w3.org/2000/svg">
+  <rect width="330" height="240" fill="#1a1a2e" rx="8"/>
+  <rect x="40" y="110.0" width="30" height="80.0" fill="#e94560" rx="2"/>
+  <text x="55" y="106.0" text-anchor="middle" fill="#e94560" font-size="11">1</text>
+  <rect x="80" y="110.0" width="30" height="80.0" fill="#0f3460" rx="2"/>
+  <text x="95" y="106.0" text-anchor="middle" fill="#0f3460" font-size="11">1</text>
+  <text x="75" y="206" text-anchor="middle" fill="#aaa" font-size="11">CX</text>
+  <rect x="130" y="110.0" width="30" height="80.0" fill="#e94560" rx="2"/>
+  <text x="145" y="106.0" text-anchor="middle" fill="#e94560" font-size="11">1</text>
+  <rect x="170" y="110.0" width="30" height="80.0" fill="#0f3460" rx="2"/>
+  <text x="185" y="106.0" text-anchor="middle" fill="#0f3460" font-size="11">1</text>
+  <text x="165" y="206" text-anchor="middle" fill="#aaa" font-size="11">H</text>
+  <rect x="220" y="30.0" width="30" height="160.0" fill="#e94560" rx="2"/>
+  <text x="235" y="26.0" text-anchor="middle" fill="#e94560" font-size="11">2</text>
+  <rect x="260" y="190.0" width="30" height="0.0" fill="#0f3460" rx="2"/>
+  <text x="255" y="206" text-anchor="middle" fill="#aaa" font-size="11">X</text>
+  <rect x="170" y="8" width="12" height="12" fill="#e94560" rx="2"/>
+  <text x="186" y="18" fill="#ccc" font-size="11">Original</text>
+  <rect x="250" y="8" width="12" height="12" fill="#0f3460" rx="2"/>
+  <text x="266" y="18" fill="#ccc" font-size="11">Optimized</text>
+</svg>
+  </div>
+
+  <h2>Hash Chain</h2>
+  <div class="card chart-container">
+    <svg width="700" height="80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="80" fill="#1a1a2e" rx="8"/>
+  <rect x="10" y="25" width="190" height="30" fill="#16213e" stroke="#0f3460" rx="4"/>
+  <text x="105" y="45" text-anchor="middle" fill="#e0e0e0" font-size="10">Original: 3769d0d5587e...</text>
+  <rect x="250" y="25" width="190" height="30" fill="#16213e" stroke="#0f3460" rx="4"/>
+  <text x="345" y="45" text-anchor="middle" fill="#e0e0e0" font-size="10">Optimized: 2d937acaf5dc...</text>
+  <rect x="490" y="25" width="190" height="30" fill="#16213e" stroke="#0f3460" rx="4"/>
+  <text x="585" y="45" text-anchor="middle" fill="#e0e0e0" font-size="10">Results: 9a5c64c21eb4...</text>
+  <line x1="200" y1="40" x2="250" y2="40" stroke="#e94560" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="440" y1="40" x2="490" y2="40" stroke="#e94560" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <defs><marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#e94560"/></marker></defs>
+</svg>
+  </div>
+
+  <h2>Equivalence Verification</h2>
+  <div class="card" style="text-align:center;">
+    <p style="margin-bottom:8px;">Fidelity: <strong>1.00000000</strong></p>
+    <span class="fidelity-badge pass">PASS</span>
+  </div>
+
+  <div class="certified-stamp">
+    <div class="label">CERTIFIED</div>
+    <p style="margin-top:8px;">Certificate Hash: <code>368e2653f1e33d3cb38e8d5b378efd07...</code></p>
+    <p><span class="sig-valid">SIGNATURE VALID</span></p>
+  </div>
+
+  <h2>Certificate Details</h2>
+  <div class="card">
+    <p><strong>Circuit:</strong> certified_bell</p>
+    <p><strong>Original Hash:</strong> <code>3769d0d5587eb3bebaff9468a317b3bd0bd0facce8165369b61b2dd86156d8c1</code></p>
+    <p><strong>Optimized Hash:</strong> <code>2d937acaf5dc67429dd899fb3ed09887b17797204bd369cb36947b24b2cb36d2</code></p>
+    <p><strong>Results Hash:</strong> <code>9a5c64c21eb4c052d8af63f4f0026c6dc788de93ca387880c4cba6c4a8ea0af2</code></p>
+    <p><strong>Backend:</strong> native_simulator</p>
+    <p><strong>Version:</strong> 2.0.0</p>
+  </div>
+</div>
+</body>
+</html>

@@ -18,8 +18,9 @@ class EquivalenceReport:
         return asdict(self)
 
 class EquivalenceChecker:
-    def __init__(self):
+    def __init__(self, tolerance: float = 1e-6):
         self.native_sim = NativeSimulator()
+        self.tolerance = tolerance
         
     def check(self, circuit: QuantumCircuit, external_vector: np.ndarray, backend_name: str) -> EquivalenceReport:
         # Run trusted simulation

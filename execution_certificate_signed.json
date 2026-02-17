@@ -1,0 +1,46 @@
+{
+  "algorithm": "HMAC-SHA256",
+  "certificate": {
+    "backend_equivalence": {
+      "backend_name": "native_simulator",
+      "circuit_hash": "2d937acaf5dc67429dd899fb3ed09887b17797204bd369cb36947b24b2cb36d2",
+      "circuit_name": "certified_bell_idrem_opt",
+      "fidelity": 0.9999999999999996,
+      "is_equivalent": 1,
+      "tolerance": 1e-06
+    },
+    "backend_name": "native_simulator",
+    "circuit_name": "certified_bell",
+    "optimization_trace": {
+      "final_hash": "2d937acaf5dc67429dd899fb3ed09887b17797204bd369cb36947b24b2cb36d2",
+      "original_hash": "20cd94b032245a6562c9833bbed112a3e64d91eff06a490188ed05b3723ef663",
+      "steps": [
+        {
+          "pass_name": "GateCancellation",
+          "post_hash": "2d937acaf5dc67429dd899fb3ed09887b17797204bd369cb36947b24b2cb36d2",
+          "pre_hash": "20cd94b032245a6562c9833bbed112a3e64d91eff06a490188ed05b3723ef663",
+          "semantic_equivalence_claim": "forall G in {H,X,Y,Z,CNOT,SWAP}, G * G = I",
+          "transformations": [
+            "Removed x pair at indices 2, 3"
+          ]
+        }
+      ]
+    },
+    "optimized_ir_hash": "2d937acaf5dc67429dd899fb3ed09887b17797204bd369cb36947b24b2cb36d2",
+    "original_ir_hash": "3769d0d5587eb3bebaff9468a317b3bd0bd0facce8165369b61b2dd86156d8c1",
+    "raw_results": {
+      "00": 512,
+      "11": 512
+    },
+    "results_hash": "9a5c64c21eb4c052d8af63f4f0026c6dc788de93ca387880c4cba6c4a8ea0af2",
+    "timestamp": 1771349826.3199828,
+    "toolkit_version": "2.0.0",
+    "verification_data": {
+      "coq_compiled": 0,
+      "logs": "coqc not found in PATH",
+      "proof_artifact_hash": "946b0add0c07869d53965302d3ff026870918295a493ce4a17440c6d93ce2ab6",
+      "theorems_checked": []
+    }
+  },
+  "signature": "d339f380a50e07fa566ce2548d3d121c5d3c896a3f6ebe2fb39863ebbe0ffa8f"
+}

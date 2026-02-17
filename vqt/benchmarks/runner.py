@@ -1,3 +1,9 @@
+import sys
+import os
+
+# Add project root to path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
 from vqt.benchmarks.algorithms import qft, grover_search
 from vqt.optimization.passes import GateCancellationPass
 from vqt.certification.certifier import Certifier

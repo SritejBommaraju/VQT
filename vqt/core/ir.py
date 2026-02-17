@@ -95,9 +95,78 @@ class QuantumCircuit:
         self.cregs.append(creg)
         return creg
 
+    def _find_qreg(self, name: str) -> Optional[QuantumRegister]:
+        for r in self.qregs:
+            if r.name == name:
+                return r
+        return None
+
+    def _find_creg(self, name: str) -> Optional[ClassicalRegister]:
+        for r in self.cregs:
+            if r.name == name:
+                return r
+        return None
+
     def append(self, gate: Gate, qubits: List[Qubit], clbits: List[Clbit] = None):
+        # Validate gate arity
+        if gate.num_qubits != len(qubits):
+            raise ValueError(
+                f"Gate '{gate.name}' expects {gate.num_qubits} qubits, got {len(qubits)}"
+            )
+        # Validate qubit registers and indices
+        for q in qubits:
+            reg = self._find_qreg(q.register_name)
+            if reg is None:
+                raise ValueError(f"Quantum register '{q.register_name}' not found")
+            if q.index < 0 or q.index >= reg.size:
+                raise IndexError(
+                    f"Qubit index {q.index} out of bounds for register "
+                    f"'{q.register_name}' (size {reg.size})"
+                )
+        # Validate classical bits
+        for c in (clbits or []):
+            reg = self._find_creg(c.register_name)
+            if reg is None:
+                raise ValueError(f"Classical register '{c.register_name}' not found")
+            if c.index < 0 or c.index >= reg.size:
+                raise IndexError(
+                    f"Clbit index {c.index} out of bounds for register "
+                    f"'{c.register_name}' (size {reg.size})"
+                )
         instruction = Instruction(gate, qubits, clbits or [])
         self.instructions.append(instruction)
+
+    @property
+    def num_qubits(self) -> int:
+        return sum(r.size for r in self.qregs)
+
+    @property
+    def num_clbits(self) -> int:
+        return sum(r.size for r in self.cregs)
+
+    @property
+    def gate_count(self) -> int:
+        return len(self.instructions)
+
+    def gate_count_by_type(self) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for instr in self.instructions:
+            name = instr.gate.name
+            counts[name] = counts.get(name, 0) + 1
+        return counts
+
+    @property
+    def depth(self) -> int:
+        if not self.instructions:
+            return 0
+        n = self.num_qubits
+        qubit_time = [0] * n
+        for instr in self.instructions:
+            indices = [q.index for q in instr.qubits]
+            start = max(qubit_time[i] for i in indices)
+            for i in indices:
+                qubit_time[i] = start + 1
+        return max(qubit_time)
 
     def to_dict(self) -> Dict[str, Any]:
         """Returns a canonical dictionary representation."""
